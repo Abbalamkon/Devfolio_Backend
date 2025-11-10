@@ -1,7 +1,7 @@
 # Netlify configuration for DevFolio Backend
 
 [build]
-  command = "npm install"
+  command = "mkdir -p public && echo 'Backend API' > public/index.html"
   functions = "functions"
   publish = "public"
 
