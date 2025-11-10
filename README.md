@@ -189,7 +189,7 @@ devfolio-backend/
 npm test
 
 # Test API health
-curl http://localhost:3000/health
+curl http://devfoliobackend.netlify.app/api/health
 ```
 
 ## 🐛 Troubleshooting

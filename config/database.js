@@ -1,5 +1,7 @@
 const { createClient } = require('@supabase/supabase-js');
 const { Pool } = require('pg');
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first');
 
 // Supabase client for authentication and storage
 const supabase = createClient(
@@ -15,13 +17,17 @@ const supabaseAdmin = createClient(
 
 // PostgreSQL pool for direct database queries
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  host: process.env.DATABASE_HOST,
+  port: parseInt(process.env.DATABASE_PORT),
+  database: process.env.DATABASE_NAME,
+  user: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
   ssl: {
     rejectUnauthorized: false
   },
   max: 20,
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
+  connectionTimeoutMillis: 5000, // Increased timeout
 });
 
 // Test database connection
